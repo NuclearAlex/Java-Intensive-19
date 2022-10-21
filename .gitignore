@@ -1,0 +1,9 @@
+.idea
+out
+*.iml
+*.pdf
+*.png
+target
+/.war
+/.ear
+/.jar
