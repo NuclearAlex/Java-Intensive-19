@@ -1,14 +1,15 @@
 import model.MyArrayList;
-import model.QuickSortMyArrayList;
 
 public class Runner {
-    public static QuickSortMyArrayList quickSort = new QuickSortMyArrayList();
+    public static final String BLUE = "\u001b[34m";
+    public static final String GREEN = "\u001b[32m";
+    public static final String DEFAULT = "\u001b[0m";
 
     public static void main(String[] args) {
         MyArrayList<Integer> myArrayList = new MyArrayList();
-        System.out.println("Create:");
-        System.out.println("Size is " + myArrayList.size());
-        System.out.println(myArrayList + "\n");
+        System.out.println("Create myArrayList...");
+        System.out.println("myArrayList size is " + GREEN + myArrayList.size() + DEFAULT);
+        System.out.println("myArrayList elements:\n" + BLUE + myArrayList + "\n" + DEFAULT);
 
         myArrayList.add(2);
         myArrayList.add(6);
@@ -18,15 +19,15 @@ public class Runner {
         myArrayList.add(5);
 
         System.out.println("Added 6 digits:");
-        System.out.println("Size is " + myArrayList.size());
-        System.out.println(myArrayList + "\n");
+        System.out.println("myArrayList size is " + GREEN + myArrayList.size() + DEFAULT);
+        System.out.println("myArrayList elements:\n" + BLUE + myArrayList + "\n" + DEFAULT);
 
         myArrayList.add(1, 8);
         myArrayList.add(5, 16);
 
-        System.out.println("Added some digits by index:");
-        System.out.println("Size is " + myArrayList.size());
-        System.out.println(myArrayList + "\n");
+        System.out.println("Added digits 8 and 16 by index \"1\" and \"5\":");
+        System.out.println("myArrayList size is " + GREEN + myArrayList.size() + DEFAULT);
+        System.out.println("myArrayList elements:\n" + BLUE + myArrayList + "\n" + DEFAULT);
 
         myArrayList.add(7);
         myArrayList.add(8);
@@ -34,16 +35,26 @@ public class Runner {
         myArrayList.add(10);
 
         System.out.println("Added digits more than init capacity:");
-        System.out.println("Size is " + myArrayList.size());
-        System.out.println(myArrayList + "\n");
+        System.out.println("myArrayList size is " + GREEN +  myArrayList.size() + DEFAULT);
+        System.out.println("myArrayList elements:\n" + BLUE + myArrayList + "\n" + DEFAULT);
 
-        System.out.println("Remove element by index:");
+        System.out.println("Remove element by index \"3\":");
         myArrayList.remove(3);
-        System.out.println("Size is " + myArrayList.size());
-        System.out.println(myArrayList + "\n");
+        System.out.println("myArrayList size is " + GREEN +  myArrayList.size() + DEFAULT);
+        System.out.println("myArrayList elements:\n" + BLUE + myArrayList + "\n" + DEFAULT);
 
         System.out.println("Sorted list:");
-        quickSort.sort(myArrayList, 0, myArrayList.size() - 1);
-        System.out.println(myArrayList + "\n");
+        myArrayList.sort(myArrayList, 0, myArrayList.size() - 1);
+        System.out.println("myArrayList elements:\n" + BLUE + myArrayList + "\n" + DEFAULT);
+
+
+        MyArrayList<Integer> testList = new MyArrayList<>();
+        for (int i = 0; i < 50_000; i++) {
+            testList.add(50_000 - i);
+        }
+        long startTime = System.currentTimeMillis();
+        myArrayList.sort(testList, 0, testList.size() - 1);
+        long endTime = System.currentTimeMillis();
+        System.out.println("Spent time for quick sort: " + GREEN + (endTime - startTime) + DEFAULT);
     }
 }
