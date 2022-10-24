@@ -53,7 +53,7 @@ public class MyArrayListTest {
             myArrayList.add(8 - i);
         }
 
-        myArrayList.sort(myArrayList, 0, myArrayList.size() - 1);
+        myArrayList.sort(0, myArrayList.size() - 1);
 
         Assert.assertEquals(2, (int) myArrayList.get(1));
         Assert.assertEquals(4, (int) myArrayList.get(3));

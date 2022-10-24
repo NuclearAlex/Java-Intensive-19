@@ -44,7 +44,7 @@ public class Runner {
         System.out.println("myArrayList elements:\n" + BLUE + myArrayList + "\n" + DEFAULT);
 
         System.out.println("Sorted list:");
-        myArrayList.sort(myArrayList, 0, myArrayList.size() - 1);
+        myArrayList.sort(0, myArrayList.size() - 1);
         System.out.println("myArrayList elements:\n" + BLUE + myArrayList + "\n" + DEFAULT);
 
 
@@ -52,8 +52,9 @@ public class Runner {
         for (int i = 0; i < 50_000; i++) {
             testList.add(50_000 - i);
         }
+        System.out.println("testList size is: " + testList.size());
         long startTime = System.currentTimeMillis();
-        myArrayList.sort(testList, 0, testList.size() - 1);
+        testList.sort(0, testList.size() - 1);
         long endTime = System.currentTimeMillis();
         System.out.println("Spent time for quick sort: " + GREEN + (endTime - startTime) + DEFAULT);
     }

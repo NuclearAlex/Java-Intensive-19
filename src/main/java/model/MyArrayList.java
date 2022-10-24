@@ -29,9 +29,7 @@ public class MyArrayList<T> {
 
     public boolean add(T newElem) {
         if (counter >= array.length - 1) {
-            T[] newArray = (T[]) new Object[array.length + 10];
-            System.arraycopy(array, 0, newArray, 0, counter);
-            array = newArray;
+            array = Arrays.copyOf(array, array.length + 10);
         }
         array[counter] = newElem;
         counter++;
@@ -100,30 +98,29 @@ public class MyArrayList<T> {
         return result;
     }
 
-                    /** Quick sort methods */
-    public <T> void sort(MyArrayList<T> array, int start, int finish) {
+                            /** Quick sort methods */
+    public void sort(int start, int finish) {
         if (start < finish) {
-            int index = divide(array, start, finish);
-            sort(array, start, index - 1);
-            sort(array, index, finish);
+            int index = divide(start, finish);
+            sort(start, index - 1);
+            sort(index, finish);
         }
     }
 
-    private <T> int divide(MyArrayList<T> array, int start, int finish) {
+    private int divide(int start, int finish) {
         int initIndex = start;
         int endIndex = finish;
-
-        T split = array.get(start + (finish - start) / 2);
+        T split = array[initIndex + (endIndex - initIndex) / 2];
         while (initIndex <= endIndex) {
 
-            while ((int) array.get(initIndex) < (int) split) {
+            while ((int) array[initIndex] < (int) split)  {
                 initIndex++;
             }
-            while ((int) array.get(endIndex) > (int) split) {
+            while ((int) array[endIndex] > (int) split) {
                 endIndex--;
             }
             if (initIndex <= endIndex) {
-                replace(array, endIndex, initIndex);
+                replace(endIndex, initIndex);
                 initIndex++;
                 endIndex--;
             }
@@ -131,10 +128,9 @@ public class MyArrayList<T> {
         return initIndex;
     }
 
-    private <T> void replace(MyArrayList<T> array, int index1, int index2) {
-        T dummy = array.get(index1);
-        array.set(index1, array.get(index2));
-        array.set(index2, dummy);
+    private void replace(int index1, int index2) {
+        T dummy = array[index1];
+        array[index1] = array[index2];
+        array[index2] = dummy;
     }
-
 }
